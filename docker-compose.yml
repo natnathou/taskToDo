@@ -12,6 +12,11 @@ services:
     tty: true
     ports:
       - '5858:5858'
+    environment:
+      MONGO_USERNAME: root
+      MONGO_PASSWORD: examplepass
+      MONGO_HOST: mongo
+      MONGO_PORT: 27017
   nginx:
     build:
       context: ./nginx
@@ -26,7 +31,7 @@ services:
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_PASSWORD: examplepass
     ports:
       - '27017:27017'
     volumes:
