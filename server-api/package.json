@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
     "dev:build": "tsc -w",
-    "dev:run": "nodemon --legacy-watch --inspect=0.0.0.0:5858 ./build/app.js"
+
+    "dev:run": "nodemon --legacy-watch --trace-deprecation --inspect=0.0.0.0:5858 ./build/app.js"
   },
   "keywords": [],
   "author": "",
