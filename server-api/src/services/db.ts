@@ -1,13 +1,20 @@
 import mongoose from 'mongoose';
 
-const connectionString = `mongodb://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}:${process.env.MONGO_PORT}`;
+const { MONGO_USERNAME, MONGO_PASSWORD, MONGO_HOSTNAME, MONGO_PORT, MONGO_DB } =
+  process.env;
 
-mongoose.connect(connectionString, {
+const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
-  console.log('we are connected');
-});
+};
+
+const url = `mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+
+mongoose
+  .connect(url, options)
+  .then(function () {
+    console.log('MongoDB is connected');
+  })
+  .catch(function (err: any) {
+    console.log(err);
+  });
